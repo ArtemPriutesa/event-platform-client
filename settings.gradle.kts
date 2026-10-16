@@ -1,4 +1,4 @@
-rootProject.name = "PagerTest"
+rootProject.name = "EventPlatform"
 
 pluginManagement {
     repositories {

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_title_1">Відкрий найкращі події навколо</string>
+    <string name="onboarding_desc_1">Концерти, фестивалі, мітапи та шоу у вашому місті. Отримуйте миттєві сповіщення та купуйте електронні квитки в один дотик.</string>
+    <string name="onboarding_title_2">Зручний пошук та фільтри</string>
+    <string name="onboarding_desc_2">Фільтруйте події за категоріями, датою та локацією. Знаходьте саме те, що надихає вас найбільше.</string>
+    <string name="onboarding_title_3">Квитки та QR-коди офлайн</string>
+    <string name="onboarding_desc_3">Ваші квитки завжди з вами в смартфоні. Швидкий доступ та сканування на вході навіть без інтернету.</string>
+    <string name="onboarding_title_4">Організовуй свої заходи</string>
+    <string name="onboarding_desc_4">Створюйте власні події, запрошуйте відвідувачів та відстежуйте статистику реєстрацій у реальному часі.</string>
+</resources>

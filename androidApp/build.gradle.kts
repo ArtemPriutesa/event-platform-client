@@ -20,11 +20,11 @@ dependencies {
 }
 
 android {
-    namespace = "ua.education.pagertest"
+    namespace = "ua.education.eventplatform"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "ua.education.pagertest"
+        applicationId = "ua.education.eventplatform"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_title_1">Discover top events around you</string>
+    <string name="onboarding_desc_1">Concerts, festivals, meetups, and shows in your city. Get instant alerts and buy electronic tickets in one tap.</string>
+    <string name="onboarding_title_2">Convenient search &amp; filters</string>
+    <string name="onboarding_desc_2">Filter events by category, date, and location. Find exactly what inspires you the most.</string>
+    <string name="onboarding_title_3">Offline tickets &amp; QR codes</string>
+    <string name="onboarding_desc_3">Your tickets are always with you on your smartphone. Quick access and scanning at the entrance even without internet.</string>
+    <string name="onboarding_title_4">Organize your own events</string>
+    <string name="onboarding_desc_4">Create your own events, invite attendees, and track registration statistics in real time.</string>
+</resources>

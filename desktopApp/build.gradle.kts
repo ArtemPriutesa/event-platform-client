@@ -17,11 +17,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "ua.education.pagertest.MainKt"
+        mainClass = "ua.education.eventplatform.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "ua.education.pagertest"
+            packageName = "ua.education.eventplatform"
             packageVersion = "1.0.0"
         }
     }

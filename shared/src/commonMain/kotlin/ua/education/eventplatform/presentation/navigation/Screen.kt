@@ -17,11 +17,11 @@ sealed interface Screen {
 @Serializable
 sealed class MainTab(val title: String) {
     @Serializable
-    data object Home : MainTab("Головна")
+    data object Home : MainTab("Main")
     @Serializable
-    data object Search : MainTab("Пошук")
+    data object Search : MainTab("Search")
     @Serializable
-    data object Tickets : MainTab("Квитки")
+    data object Tickets : MainTab("Tickets")
     @Serializable
-    data object Profile : MainTab("Профіль")
+    data object Profile : MainTab("Profile")
 }

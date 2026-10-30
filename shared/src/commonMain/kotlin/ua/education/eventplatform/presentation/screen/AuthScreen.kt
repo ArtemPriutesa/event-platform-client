@@ -23,6 +23,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import eventplatform.shared.generated.resources.Res
+import eventplatform.shared.generated.resources.auth_email_label
+import eventplatform.shared.generated.resources.auth_login_button
+import eventplatform.shared.generated.resources.auth_password_label
+import eventplatform.shared.generated.resources.auth_register_button
+import eventplatform.shared.generated.resources.auth_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun AuthScreen(
@@ -43,7 +50,7 @@ fun AuthScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Вхід / Реєстрація",
+                text = stringResource(Res.string.auth_title),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
@@ -52,7 +59,7 @@ fun AuthScreen(
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Електронна пошта") },
+                label = { Text(stringResource(Res.string.auth_email_label)) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
             )
@@ -62,7 +69,7 @@ fun AuthScreen(
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Пароль") },
+                label = { Text(stringResource(Res.string.auth_password_label)) },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(16.dp)
@@ -77,7 +84,7 @@ fun AuthScreen(
                     .height(56.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Text("Увійти", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(Res.string.auth_login_button), style = MaterialTheme.typography.titleMedium)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -89,7 +96,7 @@ fun AuthScreen(
                     .height(56.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Text("Зареєструватися", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(Res.string.auth_register_button), style = MaterialTheme.typography.titleMedium)
             }
         }
     }

@@ -8,4 +8,9 @@
     <string name="onboarding_desc_3">Ваші квитки завжди з вами в смартфоні. Швидкий доступ та сканування на вході навіть без інтернету.</string>
     <string name="onboarding_title_4">Організовуй свої заходи</string>
     <string name="onboarding_desc_4">Створюйте власні події, запрошуйте відвідувачів та відстежуйте статистику реєстрацій у реальному часі.</string>
+    <string name="auth_title">Вхід / Реєстрація</string>
+    <string name="auth_email_label">Електронна пошта</string>
+    <string name="auth_password_label">Пароль</string>
+    <string name="auth_login_button">Увійти</string>
+    <string name="auth_register_button">Зареєструватися</string>
 </resources>

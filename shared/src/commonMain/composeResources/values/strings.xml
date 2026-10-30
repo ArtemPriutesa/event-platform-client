@@ -8,4 +8,9 @@
     <string name="onboarding_desc_3">Your tickets are always with you on your smartphone. Quick access and scanning at the entrance even without internet.</string>
     <string name="onboarding_title_4">Organize your own events</string>
     <string name="onboarding_desc_4">Create your own events, invite attendees, and track registration statistics in real time.</string>
+    <string name="auth_title">Sign In / Register</string>
+    <string name="auth_email_label">Email</string>
+    <string name="auth_password_label">Password</string>
+    <string name="auth_login_button">Sign In</string>
+    <string name="auth_register_button">Register</string>
 </resources>

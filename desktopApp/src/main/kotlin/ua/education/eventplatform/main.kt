@@ -2,12 +2,16 @@ package ua.education.eventplatform
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import ua.education.eventplatform.di.initKoin
 
-fun main() = application {
-    Window(
-        onCloseRequest = ::exitApplication,
-        title = "EventPlatform",
-    ) {
-        App()
+fun main() {
+    initKoin()
+    application {
+        Window(
+            onCloseRequest = ::exitApplication,
+            title = "EventPlatform",
+        ) {
+            App()
+        }
     }
 }

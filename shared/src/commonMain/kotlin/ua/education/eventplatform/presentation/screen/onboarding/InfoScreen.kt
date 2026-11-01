@@ -1,4 +1,4 @@
-package ua.education.eventplatform.presentation.screen
+package ua.education.eventplatform.presentation.screen.onboarding
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
@@ -39,8 +39,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,7 +61,8 @@ import eventplatform.shared.generated.resources.onboarding_title_1
 import eventplatform.shared.generated.resources.onboarding_title_2
 import eventplatform.shared.generated.resources.onboarding_title_3
 import eventplatform.shared.generated.resources.onboarding_title_4
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.collect
 import org.jetbrains.compose.resources.stringResource
 import ua.education.eventplatform.presentation.theme.AppTheme
 import ua.education.eventplatform.presentation.theme.rememberAppTypography
@@ -75,8 +77,8 @@ data class OnboardingPageData(
 
 @Composable
 fun OnboardingPagerScreen(
-    onFinish: () -> Unit = {},
-    onSkip: () -> Unit = {}
+    state: OnboardingState,
+    onIntent: (OnboardingIntent) -> Unit,
 ) {
     val typography = rememberAppTypography()
     val pages = listOf(
@@ -111,7 +113,17 @@ fun OnboardingPagerScreen(
     )
 
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { pages.size })
-    val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(state.currentPage) {
+        if (pagerState.currentPage != state.currentPage) {
+            pagerState.animateScrollToPage(state.currentPage)
+        }
+    }
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPage }
+            .distinctUntilChanged()
+            .collect { page -> onIntent(OnboardingIntent.PageChanged(page)) }
+    }
 
     MaterialTheme(typography = typography) {
         Scaffold(
@@ -120,13 +132,9 @@ fun OnboardingPagerScreen(
                 TopAppBar(
                     title = {},
                     navigationIcon = {
-                        if (pagerState.currentPage > 0) {
+                        if (state.currentPage > 0) {
                             IconButton(
-                                onClick = {
-                                    coroutineScope.launch {
-                                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
-                                    }
-                                },
+                                onClick = { onIntent(OnboardingIntent.PreviousPage) },
                                 modifier = Modifier
                                     .padding(start = 12.dp)
                                     .clip(CircleShape)
@@ -142,7 +150,7 @@ fun OnboardingPagerScreen(
                     },
                     actions = {
                         IconButton(
-                            onClick = onSkip,
+                            onClick = { onIntent(OnboardingIntent.SkipOnboarding) },
                             modifier = Modifier
                                 .padding(end = 12.dp)
                                 .clip(CircleShape)
@@ -169,8 +177,8 @@ fun OnboardingPagerScreen(
                 ) {
                     PagerDotsIndicator(
                         totalDots = pages.size,
-                        selectedIndex = pagerState.currentPage,
-                        accentColor = pages[pagerState.currentPage].color,
+                        selectedIndex = state.currentPage,
+                        accentColor = pages[state.currentPage].color,
                         defaultColor = MaterialTheme.colorScheme.outlineVariant
                     )
 
@@ -178,23 +186,23 @@ fun OnboardingPagerScreen(
 
                     FilledIconButton(
                         onClick = {
-                            if (pagerState.currentPage < pages.size - 1) {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            onIntent(
+                                if (state.currentPage == pages.lastIndex) {
+                                    OnboardingIntent.CompleteOnboarding
+                                } else {
+                                    OnboardingIntent.NextPage
                                 }
-                            } else {
-                                onFinish()
-                            }
+                            )
                         },
                         modifier = Modifier.size(64.dp),
                         shape = CircleShape,
                         colors = IconButtonDefaults.filledIconButtonColors(
-                            containerColor = pages[pagerState.currentPage].color,
-                            contentColor = pages[pagerState.currentPage].onColor
+                            containerColor = pages[state.currentPage].color,
+                            contentColor = pages[state.currentPage].onColor
                         )
                     ) {
                         Icon(
-                            imageVector = if (pagerState.currentPage == pages.size - 1) {
+                            imageVector = if (state.currentPage == pages.size - 1) {
                                 Icons.Default.Check
                             } else {
                                 Icons.AutoMirrored.Filled.ArrowForward
@@ -329,6 +337,6 @@ fun PagerDotsIndicator(
 @Composable
 fun OnboardingPagerScreenPreview() {
     AppTheme {
-        OnboardingPagerScreen()
+        OnboardingPagerScreen(state = OnboardingState(), onIntent = {})
     }
 }

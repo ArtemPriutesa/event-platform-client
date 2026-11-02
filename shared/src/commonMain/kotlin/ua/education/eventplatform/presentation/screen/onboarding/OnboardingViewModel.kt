@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import ua.education.eventplatform.domain.usecase.CompleteOnboardingUseCase
 
 class OnboardingViewModel(
-    private val completeOnboarding: CompleteOnboardingUseCase,
+    private val completeOnboardingUseCase: CompleteOnboardingUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(OnboardingState())
     val state = _state.asStateFlow()
@@ -46,7 +46,7 @@ class OnboardingViewModel(
 
     private fun completeOnboarding() {
         if (_state.value.isCompleted) return
-
+        completeOnboardingUseCase()
         _state.value = _state.value.copy(isCompleted = true)
         _effects.trySend(OnboardingEffect.NavigateToAuth)
     }
